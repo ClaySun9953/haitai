@@ -34,15 +34,23 @@ st.markdown("""
     /* ---------------------------------------------------
        【核心修复 1：解决字太暗看不清的问题】
        --------------------------------------------------- */
-    /* 登录框和输入框上方的标题文字 */
+    /* 登录框和所有输入框上方的标题文字 */
     .stTextInput label p, .stSelectbox label p, .stNumberInput label p {
         color: #00f2fe !important;  
         font-size: 16px !important;
         font-weight: 800 !important;
     }
     
-    /* 修复输入框里面打字、下拉框选中后的文字颜色（强制纯白，加粗） */
-    .stTextInput input, .stNumberInput input, div[data-baseweb="select"] span {
+    /* === 【用户要求修改点】 === */
+    /* 修复【用户名文本输入框】里面打字的文字颜色（从白色改为青色，加粗） */
+    .stTextInput input {
+        color: #00f2fe !important; 
+        font-weight: 800 !important;
+        font-size: 16px !important;
+    }
+
+    /* 【别的不要动】保持数字输入框、下拉框选中后的文字颜色为白色 */
+    .stNumberInput input, div[data-baseweb="select"] span {
         color: #ffffff !important; 
         font-weight: 800 !important;
         font-size: 16px !important;
@@ -394,6 +402,7 @@ def main():
             st.markdown("<p style='text-align:center; color:#64748b;'>多传感器数据监控平台</p><br>", unsafe_allow_html=True)
             
             with st.form("auth_form"):
+                # 用户名输入框
                 usr = st.text_input("终端操作员 ID (admin)")
                 pwd = st.text_input("安全通信密钥 (1)", type="password")
                 if st.form_submit_button("接入核心网络 (CONNECT)", use_container_width=True):
